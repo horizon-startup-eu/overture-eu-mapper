@@ -16,7 +16,7 @@
       position: absolute; top: 4px; right: 4px; z-index: 1101;
       display: flex; flex-direction: column; gap: 5px;
     }
-    #togglePanelBtn, #citySelector, #toggleAllBtn, #exportCsvBtn {
+    #togglePanelBtn, #citySelector, #toggleAllBtn, #exportCsvBtn, #screenshotBtn {
       padding: 4px 8px; background: #fff; border: 1px solid #aaa;
       cursor: pointer; font-size: 13px; border-radius: 3px;
     }
@@ -78,6 +78,7 @@
   <div style="display:flex; gap:6px; align-items:center; margin-bottom:8px;">
     <button id="toggleAllBtn" title="Toggle all categories">Clear all</button>
     <button id="exportCsvBtn" style="margin-left:auto;">CSV</button>
+    <button id="screenshotBtn">Screenshot</button>
   </div>
   <div id="categoriesList"></div>
   <div id="legendToggle" title="Show legend">legend ▾</div>
@@ -112,7 +113,8 @@ function norm(s){
 /* === Leaflet map === */
 var map = L.map('map', {
   zoomSnap: 0.25, zoomDelta: 0.25,
-  wheelPxPerZoomLevel: 120, scrollWheelZoom: true
+  wheelPxPerZoomLevel: 120, scrollWheelZoom: true,
+  preferCanvas: true
 }).setView([51, 10], 4);
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
@@ -311,6 +313,63 @@ document.getElementById('exportCsvBtn').addEventListener('click', function(){
   a.download = 'places-' + ds + '.csv';
   a.click();
   URL.revokeObjectURL(a.href);
+});
+
+/* === Screenshot === */
+document.getElementById('screenshotBtn').addEventListener('click', function(){
+  var btn = this;
+  btn.disabled = true;
+  btn.textContent = 'Capturing…';
+
+  function doCapture(){
+    // Hide UI controls before capture.
+    var hideEls = [
+      document.getElementById('controlsTopRight'),
+      document.getElementById('panel'),
+      document.querySelector('.leaflet-control-zoom')
+    ].filter(Boolean);
+    var origDisplay = hideEls.map(function(el){ var d = el.style.display; el.style.display = 'none'; return d; });
+
+    // Wait for browser to repaint without UI.
+    setTimeout(function(){
+      html2canvas(document.body, {
+        useCORS: true,
+        allowTaint: true,
+        width: window.innerWidth,
+        height: window.innerHeight,
+        scrollX: 0,
+        scrollY: 0
+      }).then(function(canvas){
+        hideEls.forEach(function(el, i){ el.style.display = origDisplay[i]; });
+        btn.disabled = false;
+        btn.textContent = 'Screenshot';
+
+        var a = document.createElement('a');
+        a.href = canvas.toDataURL('image/png');
+        var d = new Date(), ds = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')+'-'+String(d.getHours()).padStart(2,'0')+'-'+String(d.getMinutes()).padStart(2,'0')+'-'+String(d.getSeconds()).padStart(2,'0');
+        a.download = 'map-' + ds + '.png';
+        a.click();
+      }).catch(function(err){
+        hideEls.forEach(function(el, i){ el.style.display = origDisplay[i]; });
+        btn.disabled = false;
+        btn.textContent = 'Screenshot';
+        console.error('Screenshot failed:', err);
+        alert('Screenshot failed. See console for details.');
+      });
+    }, 200);
+  }
+
+  // Load html2canvas on demand (first click only).
+  if (typeof html2canvas === 'undefined') {
+    var script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    script.onload = doCapture;
+    document.head.appendChild(script);
+  } else {
+    doCapture();
+  }
+  btn.disabled = false;
+  btn.textContent = 'Screenshot';
 });
 
 /* === Init === */

@@ -35,6 +35,8 @@ fi
 
 .venv/bin/python3 scripts/build_map.py
 
-echo ""
-echo "Press any key to close this window..."
-read -n 1
+if [ $? -ne 0 ]; then
+    echo ""
+    echo "Press any key to close this window..."
+    read -n 1
+fi
