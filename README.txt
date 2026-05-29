@@ -126,13 +126,16 @@ input/ and Python are left alone.
 
 WHERE THE DATA COMES FROM
 -------------------------
-- City boundaries:  Eurostat GISCO LAU 2024
+- City boundaries:  Eurostat GISCO LAU 2024 (attribution required)
                     https://ec.europa.eu/eurostat/web/gisco
-- Places:           Overture Maps Foundation
+- Places:           Overture Maps Foundation (CDLA Permissive 2.0 / ODbL)
                     https://overturemaps.org
-- Background:       OpenStreetMap
+- Map tiles:        CARTO, based on OpenStreetMap (CC BY 3.0 / ODbL)
+                    https://carto.com/attributions
 
-All sources are open and freely available.
+All sources are open and freely available. Maps you build are
+free to use, share, and publish — just keep the attribution
+line visible on the map. See output/LICENSE.txt for details.
 
 
 NEED HELP?

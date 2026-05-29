@@ -1,0 +1,19 @@
+MAP LICENSE
+===========
+
+Maps built with this tool combine open data and open-source software.
+Free to use, share, and publish — just keep the
+attribution line visible on the map.
+
+Sources:
+
+  Places      Overture Maps Foundation (CDLA Permissive 2.0 / ODbL)
+              https://overturemaps.org
+
+  Tiles       CARTO, based on OpenStreetMap (CC BY 3.0 / ODbL)
+              https://carto.com/attributions
+
+  Boundaries  Eurostat GISCO LAU 2024 (attribution required)
+              https://ec.europa.eu/eurostat/web/gisco
+
+  Software    Leaflet (BSD-2-Clause), html2canvas (MIT)

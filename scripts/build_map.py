@@ -729,6 +729,32 @@ def main() -> None:
         print("  No places found.")
         sys.exit(0)
 
+    # Ensure LICENSE.txt exists in output/.
+    license_path = MAP_DIR / "LICENSE.txt"
+    if not license_path.exists():
+        license_path.write_text(
+            "MAP LICENSE\n"
+            "===========\n"
+            "\n"
+            "Maps built with this tool combine open data and open-source software.\n"
+            "Free to use, share, and publish \u2014 just keep the\n"
+            "attribution line visible on the map.\n"
+            "\n"
+            "Sources:\n"
+            "\n"
+            "  Places      Overture Maps Foundation (CDLA Permissive 2.0 / ODbL)\n"
+            "              https://overturemaps.org\n"
+            "\n"
+            "  Tiles       CARTO, based on OpenStreetMap (CC BY 3.0 / ODbL)\n"
+            "              https://carto.com/attributions\n"
+            "\n"
+            "  Boundaries  Eurostat GISCO LAU 2024 (attribution required)\n"
+            "              https://ec.europa.eu/eurostat/web/gisco\n"
+            "\n"
+            "  Software    Leaflet (BSD-2-Clause), html2canvas (MIT)\n",
+            encoding="utf-8",
+        )
+
     # Generate map.
     out_path = generate_html(places_fc, boundary_fc, title)
     print(f"  Map saved: {out_path}")
