@@ -13,7 +13,10 @@ Sources:
   Tiles       CARTO, based on OpenStreetMap (CC BY 3.0 / ODbL)
               https://carto.com/attributions
 
-  Boundaries  Eurostat GISCO LAU 2024 (attribution required)
+  Boundaries  © EuroGeographics for the administrative boundaries
+              Source: Eurostat GISCO LAU 2024
+              Non-commercial use only. Commercial use requires a
+              separate licence from EuroGeographics.
               https://ec.europa.eu/eurostat/web/gisco
 
   Software    Leaflet (BSD-2-Clause), html2canvas (MIT)

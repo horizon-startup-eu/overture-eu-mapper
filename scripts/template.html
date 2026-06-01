@@ -241,7 +241,8 @@ function setupUI(){
     allCats.map(function(c){
       var col = catColors[c]||'gray';
       return '<span style="color:'+esc(col)+'">●</span> '+esc(c.replace(/_/g,' '));
-    }).join('<br>');
+    }).join('<br>') +
+    '<br><br><span style="font-size:11px;color:#555;">Boundaries \u00a9 EuroGeographics</span>';
 
   function debounce(fn, wait){
     var t; return function(){ clearTimeout(t); t=setTimeout(fn, wait); };

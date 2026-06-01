@@ -126,8 +126,11 @@ input/ and Python are left alone.
 
 WHERE THE DATA COMES FROM
 -------------------------
-- City boundaries:  Eurostat GISCO LAU 2024 (attribution required)
+- City boundaries:  © EuroGeographics for the administrative boundaries
+                    Source: Eurostat GISCO LAU 2024
                     https://ec.europa.eu/eurostat/web/gisco
+                    Non-commercial use only. Commercial use requires
+                    a separate licence from EuroGeographics.
 - Places:           Overture Maps Foundation (CDLA Permissive 2.0 / ODbL)
                     https://overturemaps.org
 - Map tiles:        CARTO, based on OpenStreetMap (CC BY 3.0 / ODbL)

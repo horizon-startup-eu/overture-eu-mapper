@@ -748,7 +748,10 @@ def main() -> None:
             "  Tiles       CARTO, based on OpenStreetMap (CC BY 3.0 / ODbL)\n"
             "              https://carto.com/attributions\n"
             "\n"
-            "  Boundaries  Eurostat GISCO LAU 2024 (attribution required)\n"
+            "  Boundaries  \u00a9 EuroGeographics for the administrative boundaries\n"
+            "              Source: Eurostat GISCO LAU 2024\n"
+            "              Non-commercial use only. Commercial use requires a\n"
+            "              separate licence from EuroGeographics.\n"
             "              https://ec.europa.eu/eurostat/web/gisco\n"
             "\n"
             "  Software    Leaflet (BSD-2-Clause), html2canvas (MIT)\n",
