@@ -19,4 +19,4 @@ Sources:
               separate licence from EuroGeographics.
               https://ec.europa.eu/eurostat/web/gisco
 
-  Software    Leaflet (BSD-2-Clause), html2canvas (MIT)
+  Software    Leaflet (BSD-2-Clause), DuckDB (MIT), html2canvas (MIT)

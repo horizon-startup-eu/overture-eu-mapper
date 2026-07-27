@@ -146,6 +146,14 @@ NEED HELP?
 Email magnus.liistamo@humangeo.su.se
 Department of Human Geography, Stockholm University.
 
+THE MAPPING METHOD
+------------------
+This tool grew out of a mapping method developed in
+the STARTUP research project. The guide explains the thinking behind
+it — how to map a category that no existing list covers, like small
+cultural organisations in a neighbourhood.
+
+  https://github.com/Liistamo/overture-eu-mapper/blob/main/mapping-guide-doing-your-own-map.pdf
 
 CREDITS
 -------

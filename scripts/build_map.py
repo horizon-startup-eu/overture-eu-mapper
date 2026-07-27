@@ -754,7 +754,7 @@ def main() -> None:
             "              separate licence from EuroGeographics.\n"
             "              https://ec.europa.eu/eurostat/web/gisco\n"
             "\n"
-            "  Software    Leaflet (BSD-2-Clause), html2canvas (MIT)\n",
+            "  Software    Leaflet (BSD-2-Clause), DuckDB (MIT), html2canvas (MIT)\n",
             encoding="utf-8",
         )
 
