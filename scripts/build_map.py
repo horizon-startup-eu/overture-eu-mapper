@@ -509,20 +509,48 @@ def find_input_csv() -> Path | None:
     return max(csvs, key=lambda p: p.stat().st_mtime)
 
 
+def _detect_delimiter(sample: str) -> str:
+    """Detect CSV delimiter from the first line (honoring quotes)."""
+    first = (sample or "").lstrip("\ufeff").splitlines()[0] if sample else ""
+    candidates = [",", ";", "\t", "|"]
+    counts = {c: 0 for c in candidates}
+    in_quote = False
+    for ch in first:
+        if ch == '"':
+            in_quote = not in_quote
+        elif not in_quote and ch in counts:
+            counts[ch] += 1
+    return max(counts, key=counts.get)
+
+
+def _parse_number(s: str) -> float:
+    """Parse a number string, handling comma decimals and unicode minus."""
+    s = s.strip()
+    # Unicode minus signs → ASCII minus
+    for ch in "\u2212\u2013\u2014\uFE63\uFF0D":
+        s = s.replace(ch, "-")
+    # Comma as decimal separator (only if no dot present)
+    if "," in s and "." not in s:
+        s = s.replace(",", ".")
+    return float(s)
+
+
 def load_csv_as_geojson(csv_path: Path, groups: dict[str, list[str]]) -> dict:
     """Read an exported CSV and return a places FeatureCollection."""
     print(f"  Loading: {csv_path.name}")
 
+    text = csv_path.read_text(encoding="utf-8-sig", errors="replace")
+    delim = _detect_delimiter(text)
+
     # First pass: read all rows and collect categories.
     raw_rows = []
-    with open(csv_path, encoding="utf-8-sig") as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            lat = row.get("lat", "").strip()
-            lon = row.get("lon", "").strip()
-            if not lat or not lon:
-                continue
-            raw_rows.append(row)
+    reader = csv.DictReader(text.splitlines(), delimiter=delim)
+    for row in reader:
+        lat = (row.get("lat") or "").strip()
+        lon = (row.get("lon") or "").strip()
+        if not lat or not lon:
+            continue
+        raw_rows.append(row)
 
     all_cats = sorted({
         (r.get("category", "").strip() or "unknown") for r in raw_rows
@@ -534,19 +562,24 @@ def load_csv_as_geojson(csv_path: Path, groups: dict[str, list[str]]) -> dict:
     for row in raw_rows:
         category = row.get("category", "unknown").strip() or "unknown"
         props = {
-            "name": row.get("name", "Unnamed").strip() or "Unnamed",
+            "name": (row.get("name") or "Unnamed").strip() or "Unnamed",
             "category": category,
-            "city": row.get("city", "").strip(),
+            "city": (row.get("city") or "").strip(),
             "color": get_category_color(category, groups),
         }
-        website = row.get("website", "").strip()
+        website = (row.get("website") or "").strip()
         if website:
             props["website"] = website
+        try:
+            lon = _parse_number(row["lon"])
+            lat = _parse_number(row["lat"])
+        except (ValueError, KeyError):
+            continue
         features.append({
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [float(row["lon"].strip()), float(row["lat"].strip())],
+                "coordinates": [lon, lat],
             },
             "properties": props,
             })
