@@ -10,7 +10,7 @@ authors:
     email: magnus.liistamo@humangeo.su.se
     affiliation: "Stockholm University, Department of Human Geography"
 license: Apache-2.0
-repository-code: "https://github.com/Liistamo/overture-eu-mapper"
+repository-code: "https://github.com/horizon-startup-eu/overture-eu-mapper"
 type: software
 version: "0.1.0"
 keywords:
@@ -32,7 +32,7 @@ preferred-citation:
       affiliation: "Stockholm University, Department of Human Geography"
   year: 2026
   version: "0.1.0"
-  url: "https://github.com/Liistamo/overture-eu-mapper/releases/latest"
+  url: "https://github.com/horizon-startup-eu/overture-eu-mapper/releases/latest"
   license: "Apache-2.0"
   notes: >
     Please cite as: Magnus Liistamo / STARTUP, 2026.
@@ -48,5 +48,5 @@ references:
         affiliation: "Stockholm University, Department of Human Geography"
     year: 2025
     version: "0.1.0"
-    url: "https://github.com/Liistamo/cultural_data"
+    url: "https://github.com/horizon-startup-eu/startup-cultural-data"
     license: "Apache-2.0"

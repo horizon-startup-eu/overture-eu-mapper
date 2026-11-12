@@ -153,7 +153,7 @@ the STARTUP research project. The guide explains the thinking behind
 it — how to map a category that no existing list covers, like small
 cultural organisations in a neighbourhood.
 
-  https://github.com/Liistamo/overture-eu-mapper/blob/main/mapping-guide-doing-your-own-map.pdf
+  https://github.com/horizon-startup-eu/overture-eu-mapper/blob/main/mapping-guide-doing-your-own-map.pdf
 
 CREDITS
 -------
@@ -170,4 +170,4 @@ granting authority. Neither the European Union nor the granting
 authority can be held responsible for them.
 
 Project repository:
-https://github.com/Liistamo/overture-eu-mapper
+https://github.com/horizon-startup-eu/overture-eu-mapper
